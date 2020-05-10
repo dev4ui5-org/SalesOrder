@@ -1,0 +1,78 @@
+<mvc:View controllerName="com.sample.SalesOrder.controller.CreateEntity" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="{viewModel>/viewTitle}" busy="{viewModel>/busy}">
+		<semantic:content>
+			<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
+				title="{= ${viewModel>/mode} === 'edit'? 'Edit GWSAMPLE_BASIC.SalesOrder': 'New GWSAMPLE_BASIC.SalesOrder'}">
+				<f:content>
+					<Label text="Sa. Ord. ID" required="true"/>
+					<Input name="SalesOrderID" id="SalesOrderID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'SalesOrderID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10, nullable:false } }"/>
+					<Label text="Description" required="false"/>
+					<Input name="Note" id="Note_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Note', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:255 } }"/>
+					<Label text="Language" required="false"/>
+					<Input name="NoteLanguage" id="NoteLanguage_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'NoteLanguage', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:2 } }"/>
+					<Label text="Bus. Part. ID" required="true"/>
+					<Input name="CustomerID" id="CustomerID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'CustomerID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10, nullable:false } }"/>
+					<Label text="Company Name" required="false"/>
+					<Input name="CustomerName" id="CustomerName_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'CustomerName', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:80 } }"/>
+					<Label text="Currency" required="false"/>
+					<Input name="CurrencyCode" id="CurrencyCode_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'CurrencyCode', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }"/>
+					<Label text="Gross Amt." required="false"/>
+					<Input name="GrossAmount" id="GrossAmount_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'GrossAmount', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:16, scale:3 } }"/>
+					<Label text="Net Amt." required="false"/>
+					<Input name="NetAmount" id="NetAmount_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'NetAmount', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:16, scale:3 } }"/>
+					<Label text="Tax Amt." required="false"/>
+					<Input name="TaxAmount" id="TaxAmount_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'TaxAmount', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:16, scale:3 } }"/>
+					<Label text="PO Lifecycle" required="false"/>
+					<Input name="LifecycleStatus" id="LifecycleStatus_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false"
+						visible="true" value="{ path: 'LifecycleStatus', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
+					<Label text="Lifecycle Descript." required="false"/>
+					<Input name="LifecycleStatusDescription" id="LifecycleStatusDescription_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="false" visible="true"
+						value="{ path: 'LifecycleStatusDescription', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:60 } }"/>
+					<Label text="PO Confirmation" required="false"/>
+					<Input name="BillingStatus" id="BillingStatus_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'BillingStatus', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
+					<Label text="Billing Description" required="false"/>
+					<Input name="BillingStatusDescription" id="BillingStatusDescription_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="false" visible="true"
+						value="{ path: 'BillingStatusDescription', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:60 } }"/>
+					<Label text="PO Ordering" required="false"/>
+					<Input name="DeliveryStatus" id="DeliveryStatus_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false"
+						visible="true" value="{ path: 'DeliveryStatus', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
+					<Label text="Delivery Description" required="false"/>
+					<Input name="DeliveryStatusDescription" id="DeliveryStatusDescription_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="false" visible="true"
+						value="{ path: 'DeliveryStatusDescription', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:60 } }"/>
+					<Label text="Time Stamp" required="false"/>
+					<DatePicker name="CreatedAt" value="{ path: 'CreatedAt', type: 'sap.ui.model.type.DateTime'}" id="CreatedAt_id" type="DateTime"
+						enabled="false" visible="true"/>
+					<Label text="Time Stamp" required="false"/>
+					<DatePicker name="ChangedAt" value="{ path: 'ChangedAt', type: 'sap.ui.model.type.DateTime'}" id="ChangedAt_id" type="DateTime"
+						enabled="false" visible="true"/>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" enabled="{viewModel>/enableCreate}" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"></semantic:CancelAction>
+		</semantic:cancelAction>
+	</semantic:DetailPage>
+</mvc:View>
